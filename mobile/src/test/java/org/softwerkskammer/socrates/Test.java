@@ -8,6 +8,6 @@ public class Test {
     @org.junit.Test
     public void failingTest() throws Exception {
 
-        assertThat("SoCraTes", is(equalTo("awesome")));
+        assertThat("SoCraTes", is(equalTo("SoCraTes")));
     }
 }
