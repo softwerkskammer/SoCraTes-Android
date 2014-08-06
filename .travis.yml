@@ -24,4 +24,4 @@ android:
     - sys-img-armeabi-v7a-android-20
     - sys-img-x86-android-20
 
-script: ./gradlew connectedInstrumentTest
+script: ./gradlew test
