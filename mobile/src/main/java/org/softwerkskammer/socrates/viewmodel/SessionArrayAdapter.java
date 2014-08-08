@@ -19,24 +19,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SessionArrayAdapter extends BaseAdapter {  
+public class SessionArrayAdapter extends BaseAdapter {
     private final Context context;
     private final ArrayList values;
     private final LayoutInflater layoutInflater;
 
-    public SessionArrayAdapter(Context context, Session[] values, LayoutInflater inflater) {
+    public SessionArrayAdapter(Context context, ArrayList values, LayoutInflater inflater) {
         layoutInflater = inflater;
         this.context = context;
-
-        this.values = new ArrayList();
-        Date lastTimestamp = null;
-        for (Session session : values){
-            if (! session.startTime.equals(lastTimestamp)){
-                this.values.add(session.startTime);
-                lastTimestamp = session.startTime;
-            }
-            this.values.add(session);
-        }
+        this.values = values;
     }
 
     @Override
