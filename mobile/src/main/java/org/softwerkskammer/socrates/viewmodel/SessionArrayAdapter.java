@@ -66,7 +66,7 @@ public class SessionArrayAdapter extends BaseAdapter {
             Date startingDate = (Date) values.get(position);
             View rowView = inflater.inflate(R.layout.session_header_row, parent, false);
             TextView startTimeView = (TextView) rowView.findViewById(R.id.startTimeView);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("H:mm");
 
             startTimeView.setText("Start time: " + simpleDateFormat.format(startingDate));
             return rowView;
