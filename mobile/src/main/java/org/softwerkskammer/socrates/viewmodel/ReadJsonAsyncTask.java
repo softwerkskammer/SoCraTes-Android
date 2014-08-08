@@ -8,19 +8,22 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.softwerkskammer.socrates.viewmodel.Session;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
+
+    private SessionArrayAdapter adapter;
+    private List<Session> sessions;
+
+    public ReadJsonAsyncTask(SessionArrayAdapter adapter) {
+        this.adapter = adapter;
+    }
 
     @Override
     protected Void doInBackground(Void... voids) {
@@ -44,9 +47,8 @@ public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
         return content;
     }
 
-    private Session[] readJson() throws Exception {
+    private void readJson() throws Exception {
         String url = "http://jsonblob.com/api/jsonBlob/53e547ffe4b0bab7bd401bd6";
-        BufferedReader in = new BufferedReader(new InputStreamReader(getInputStreamFromUrl(url)));
 
         JsonReader reader = new JsonReader(new InputStreamReader(getInputStreamFromUrl(url), "UTF-8"));
         reader.beginObject();
@@ -83,7 +85,12 @@ public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
         reader.endObject();
 
         Log.d("sessions", sessions.toString());
+        this.sessions = sessions;
+    }
 
-        return null;
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        adapter.setValues(sessions);
+        adapter.notifyDataSetChanged();
     }
 }

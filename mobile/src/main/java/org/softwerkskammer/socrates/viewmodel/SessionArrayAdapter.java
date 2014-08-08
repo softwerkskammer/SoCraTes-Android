@@ -21,7 +21,7 @@ import java.util.Objects;
 
 public class SessionArrayAdapter extends BaseAdapter {
     private final Context context;
-    private final ArrayList values;
+    private final List values;
     private final LayoutInflater layoutInflater;
 
     public SessionArrayAdapter(Context context, ArrayList values, LayoutInflater inflater) {
@@ -71,5 +71,23 @@ public class SessionArrayAdapter extends BaseAdapter {
             startTimeView.setText("Start time: " + simpleDateFormat.format(startingDate));
             return rowView;
         }
+    }
+
+    private List addHeaderSections(List<Session> values){
+        List returnValue = new ArrayList();
+        Date lastTimestamp = null;
+        for (Session session : values){
+            if (!session.startTime.equals(lastTimestamp)){
+                returnValue.add(session.startTime);
+                lastTimestamp = session.startTime;
+            }
+            returnValue.add(session);
+        }
+        return returnValue;
+    }
+
+    public void setValues(List<Session> sessions) {
+        values.clear();
+        values.addAll(addHeaderSections(sessions));
     }
 }
