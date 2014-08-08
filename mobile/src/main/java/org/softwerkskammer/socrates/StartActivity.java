@@ -30,8 +30,7 @@ public class StartActivity extends ListActivity {
         instance.set(2014, Calendar.AUGUST, 9, 9, 0);
         session.startTime = instance.getTime();
 
-        Session[] values = new Session[] { session };
-
+        Session[] values = new Session[] { session, session, session, session };
         setListAdapter(new SessionArrayAdapter(getApplicationContext(), values));
     }
 

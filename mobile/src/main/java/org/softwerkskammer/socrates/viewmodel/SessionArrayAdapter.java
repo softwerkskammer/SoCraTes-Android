@@ -26,10 +26,19 @@ public class SessionArrayAdapter extends ArrayAdapter<Session> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.label);
-        TextView titleView = (TextView) rowView.findViewById(R.id.title);
-        textView.setText("test");
-        titleView.setText("test2");
+
+        Session currentSession = values[position];
+
+        TextView titleView = (TextView) rowView.findViewById(R.id.titleView);
+        titleView.setText(currentSession.title);
+
+        TextView sessionOwnerView = (TextView) rowView.findViewById(R.id.ownerView);
+        sessionOwnerView.setText(currentSession.owner);
+
+        TextView durationView = (TextView) rowView.findViewById(R.id.durationView);
+        durationView.setText(currentSession.duration);
+
+
         return rowView;
     }
 }
