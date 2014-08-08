@@ -2,43 +2,80 @@ package org.softwerkskammer.socrates.viewmodel;
 
 
 import android.content.Context;
+import android.text.method.DateTimeKeyListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.softwerkskammer.socrates.R;
 
-public class SessionArrayAdapter extends ArrayAdapter<Session> {
-    private final Context context;
-    private final Session[] values;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-    public SessionArrayAdapter(Context context, Session[] values) {
-        super(context, R.layout.rowlayout, values);
+public class SessionArrayAdapter extends BaseAdapter {
+    private final Context context;
+    private final ArrayList values;
+    private final LayoutInflater layoutInflater;
+
+    public SessionArrayAdapter(Context context, Session[] values, LayoutInflater inflater) {
+        layoutInflater = inflater;
         this.context = context;
-        this.values = values;
+
+        this.values = new ArrayList();
+        Date lastTimestamp = null;
+        for (Session session : values){
+            if (session.startTime != lastTimestamp){
+                this.values.add(session.startTime);
+                lastTimestamp = session.startTime;
+            }
+            this.values.add(session);
+        }
+    }
+
+    @Override
+    public int getCount() {
+        return values.size();
+    }
+
+    @Override
+    public Object getItem(int i) {
+        return values.get(i);
+    }
+
+    @Override
+    public long getItemId(int i) {
+        return i;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
 
-        Session currentSession = values[position];
+        if (values.get(position) instanceof Session) {
+            View rowView = inflater.inflate(R.layout.session_row, parent, false);
+            Session currentSession = (Session) values.get(position);
+            TextView titleView = (TextView) rowView.findViewById(R.id.titleView);
+            titleView.setText(currentSession.title);
 
-        TextView titleView = (TextView) rowView.findViewById(R.id.titleView);
-        titleView.setText(currentSession.title);
+            TextView sessionOwnerView = (TextView) rowView.findViewById(R.id.ownerView);
+            sessionOwnerView.setText(currentSession.owner);
 
-        TextView sessionOwnerView = (TextView) rowView.findViewById(R.id.ownerView);
-        sessionOwnerView.setText(currentSession.owner);
-
-        TextView durationView = (TextView) rowView.findViewById(R.id.durationView);
-        durationView.setText(currentSession.duration);
-
-
-        return rowView;
+            TextView durationView = (TextView) rowView.findViewById(R.id.durationView);
+            durationView.setText(currentSession.duration);
+            return rowView;
+        } else {
+            Date startingDate = (Date) values.get(position);
+            View rowView = inflater.inflate(R.layout.session_header_row, parent, false);
+            TextView startTimeView = (TextView) rowView.findViewById(R.id.startTimeView);
+            startTimeView.setText(startingDate.toString());
+            return rowView;
+        }
     }
 }

@@ -2,7 +2,9 @@ package org.softwerkskammer.socrates;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -13,7 +15,7 @@ import org.softwerkskammer.socrates.viewmodel.SessionArrayAdapter;
 import java.util.Calendar;
 
 
-public class StartActivity extends ListActivity {
+public class MyConferenceScheduleActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,8 @@ public class StartActivity extends ListActivity {
         session.startTime = instance.getTime();
 
         Session[] values = new Session[] { session, session, session, session };
-        setListAdapter(new SessionArrayAdapter(getApplicationContext(), values));
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        setListAdapter(new SessionArrayAdapter(getApplicationContext(), values, inflater));
     }
 
 
