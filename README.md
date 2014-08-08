@@ -1,6 +1,10 @@
 # SoCraTes-Android
 
-The SoCraTes Confernece App for Android
+The SoCraTes Conference App for Android
+
+The events are loaded from http://jsonblob.com/api/jsonBlob/53e547ffe4b0bab7bd401bd6.  
+Edit the list at http://jsonblob.com/53e547ffe4b0bab7bd401bd6.
+
 
 ## Development Setup
 
