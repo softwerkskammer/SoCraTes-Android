@@ -1,0 +1,33 @@
+{
+	"events" : [
+	 	{ "kind" : "session_scheduled",
+		  "session_id" : "1",
+		  "start_time" : "",
+		  "duration" : "1.5h",
+		  "title" : "Marketplace",
+		  "session_owner" : "Johannes Seitz",
+		  "room" : "Wiesbaden",
+		  "mandatory" : "true"
+		}
+	]
+}
+
+
+/*{ "kind" : "session_scheduled",
+			 "session_id" : "1",
+		     "day_id" : "1",
+		     "timeslot_id" : "3", 
+		     "title" : "Swift in a nutshell",
+		     "session_owner" : "Johannes Seitz",
+		     "room" : "Wiesbaden" 
+		}, { "kind" : "session_rescheduled",
+		     "session_id" : "1",
+		     "from_timeslot_id" : "3",
+		     "to_timeslot_id" : "4"
+		}, { "kind" : "session_relocated",
+		     "session_id" : "1",
+		     "from_room" : "Wiesbaden",
+		     "to_room" : "Stuttgard"
+		}, { "kind" : "session_cancelled",
+		     "session_id" : "1"
+		}*/

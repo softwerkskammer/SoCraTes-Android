@@ -1,17 +1,38 @@
 package org.softwerkskammer.socrates;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+
+import org.softwerkskammer.socrates.viewmodel.Session;
+import org.softwerkskammer.socrates.viewmodel.SessionArrayAdapter;
+
+import java.util.Calendar;
 
 
-public class StartActivity extends Activity {
+public class StartActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        Session session = new Session();
+        session.title = "Marketplace";
+        session.duration = "1.5h";
+        session.owner = "Pierluigi";
+        session.shortDescription = "Decide what to talk about";
+        session.room = "Böhmesaal";
+        Calendar instance = Calendar.getInstance();
+        instance.set(2014, Calendar.AUGUST, 9, 9, 0);
+        session.startTime = instance.getTime();
+
+        Session[] values = new Session[] { session };
+
+        setListAdapter(new SessionArrayAdapter(getApplicationContext(), values));
     }
 
 
