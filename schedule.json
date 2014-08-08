@@ -4,29 +4,25 @@
           "duration" : "1.5h",
           "title" : "Marketplace",
           "session_owner" : "Pierluigi",
-          "room" : "Böhmesaal",
-          "mandatory" : "true"
+          "room" : "Böhmesaal"
         },
          {"start_time" : "12:30",
           "duration" : "1.5h",
           "title" : "Lunch",
           "session_owner" : "",
-          "room" : "Restaurant",
-          "mandatory" : "true"
+          "room" : "Restaurant"
         },
         { "start_time" : "17:30",
           "duration" : "1h",
           "title" : "Evening News",
           "session_owner" : "Pierluigi",
-          "room" : "Böhmesaal",
-          "mandatory" : "true"
+          "room" : "Böhmesaal"
          },
          { "start_time" : "19:30",
            "duration" : "1.5h",
            "title" : "Dinner",
            "session_owner" : "",
-           "room" : "Restaurant",
-           "mandatory" : "true"
+           "room" : "Restaurant"
          }
     ],
 }
