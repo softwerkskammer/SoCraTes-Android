@@ -1,0 +1,22 @@
+{
+    "events" : [
+         { "kind" : "session_scheduled",
+          "session_id" : "1",
+          "start_time" : "9:00",
+          "duration" : "1.5h",
+          "title" : "Marketplace",
+          "session_owner" : "Pierluigi",
+          "room" : "Böhmesaal",
+          "mandatory" : "true"
+        },
+         { "kind" : "session_scheduled",
+          "session_id" : "1",
+          "start_time" : "12:30",
+          "duration" : "1.5h",
+          "title" : "Lunch",
+          "session_owner" : "",
+          "room" : "Restaurant",
+          "mandatory" : "true"
+        }
+    ],
+}
