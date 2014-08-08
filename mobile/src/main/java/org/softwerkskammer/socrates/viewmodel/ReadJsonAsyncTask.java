@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
 
@@ -22,8 +26,8 @@ public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         try {
             readJson();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e("", "Could not read JSON", e);
         }
         return null;
     }
@@ -40,14 +44,45 @@ public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
         return content;
     }
 
-    private Session[] readJson() throws IOException {
-        String url = "http://gist.githubusercontent.com/mknittig/1ed20cd664331049dbdd/raw/bee9682905c70e2c8745258ce337fae7b980c0f9/socrates-event-stream.json";
+    private Session[] readJson() throws Exception {
+        String url = "http://jsonblob.com/api/jsonBlob/53e547ffe4b0bab7bd401bd6";
         BufferedReader in = new BufferedReader(new InputStreamReader(getInputStreamFromUrl(url)));
 
         JsonReader reader = new JsonReader(new InputStreamReader(getInputStreamFromUrl(url), "UTF-8"));
         reader.beginObject();
-        String name = reader.nextName();
-        Log.e("foo", name);
+        reader.nextName();
+        reader.beginArray();
+
+        List<Session> sessions = new ArrayList<Session>();
+
+        while (reader.hasNext()) {
+            reader.beginObject();
+            Session session = new Session();
+
+            reader.nextName();
+            SimpleDateFormat someFormat = new SimpleDateFormat("HH:mm", Locale.GERMANY);
+            session.startTime = someFormat.parse(reader.nextString());
+
+            reader.nextName();
+            session.duration = reader.nextString();
+
+            reader.nextName();
+            session.title = reader.nextString();
+
+            reader.nextName();
+            session.owner = reader.nextString();
+
+            reader.nextName();
+            session.room = reader.nextString();
+
+            reader.endObject();
+
+            sessions.add(session);
+        }
+        reader.endArray();
+        reader.endObject();
+
+        Log.d("sessions", sessions.toString());
 
         return null;
     }
