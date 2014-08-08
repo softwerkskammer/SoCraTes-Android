@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import org.softwerkskammer.socrates.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SessionArrayAdapter extends BaseAdapter {
+public class SessionArrayAdapter extends BaseAdapter {  
     private final Context context;
     private final ArrayList values;
     private final LayoutInflater layoutInflater;
@@ -30,7 +31,7 @@ public class SessionArrayAdapter extends BaseAdapter {
         this.values = new ArrayList();
         Date lastTimestamp = null;
         for (Session session : values){
-            if (session.startTime != lastTimestamp){
+            if (! session.startTime.equals(lastTimestamp)){
                 this.values.add(session.startTime);
                 lastTimestamp = session.startTime;
             }
@@ -74,7 +75,9 @@ public class SessionArrayAdapter extends BaseAdapter {
             Date startingDate = (Date) values.get(position);
             View rowView = inflater.inflate(R.layout.session_header_row, parent, false);
             TextView startTimeView = (TextView) rowView.findViewById(R.id.startTimeView);
-            startTimeView.setText(startingDate.toString());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm");
+
+            startTimeView.setText("Start time: " + simpleDateFormat.format(startingDate));
             return rowView;
         }
     }
