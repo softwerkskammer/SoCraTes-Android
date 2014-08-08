@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.softwerkskammer.socrates.viewmodel.ReadJsonAsyncTask;
 import org.softwerkskammer.socrates.viewmodel.Session;
 import org.softwerkskammer.socrates.viewmodel.SessionArrayAdapter;
 
@@ -19,6 +20,8 @@ public class MyConferenceScheduleActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        new ReadJsonAsyncTask().execute();
 
         Session session = createASession(9, 0);
         Session session1 = createASession(9, 30);
