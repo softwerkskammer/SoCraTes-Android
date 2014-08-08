@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "org.softwerkskammer.socrates"
         minSdkVersion 14
-        targetSdkVersion 20
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
     }
