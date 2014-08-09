@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import org.softwerkskammer.socrates.R;
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,6 +63,9 @@ public class SessionArrayAdapter extends BaseAdapter {
 
             TextView durationView = (TextView) rowView.findViewById(R.id.durationView);
             durationView.setText(currentSession.duration);
+
+            TextView roomView = (TextView) rowView.findViewById(R.id.roomView);
+            roomView.setText(currentSession.room);
             return rowView;
         } else {
             Date startingDate = (Date) values.get(position);
