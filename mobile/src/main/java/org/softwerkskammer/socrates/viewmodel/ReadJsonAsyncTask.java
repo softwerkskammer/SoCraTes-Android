@@ -1,8 +1,10 @@
 package org.softwerkskammer.socrates.viewmodel;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,11 +20,14 @@ import java.util.Locale;
 
 public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
 
-    private SessionArrayAdapter adapter;
+    private final Context context;
+    private final SessionArrayAdapter adapter;
     private List<Session> sessions;
+    private boolean error;
 
-    public ReadJsonAsyncTask(SessionArrayAdapter adapter) {
+    public ReadJsonAsyncTask(SessionArrayAdapter adapter, Context context) {
         this.adapter = adapter;
+        this.context = context;
     }
 
     @Override
@@ -30,6 +35,7 @@ public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
         try {
             readJson();
         } catch (Exception e) {
+            error = true;
             Log.e("", "Could not read JSON", e);
         }
         return null;
@@ -90,7 +96,12 @@ public class ReadJsonAsyncTask extends AsyncTask<Void, Void, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        adapter.setValues(sessions);
-        adapter.notifyDataSetChanged();
+        if (this.error){
+            Toast errorToast = Toast.makeText(context, "No internet connection :-((", 2);
+            errorToast.show();
+        } else {
+            adapter.setValues(sessions);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

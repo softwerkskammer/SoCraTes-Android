@@ -34,7 +34,7 @@ public class MyConferenceScheduleActivity extends ListActivity {
         listAdapter = new SessionArrayAdapter(getApplicationContext(), values, inflater);
         setListAdapter(listAdapter);
 
-        new ReadJsonAsyncTask(listAdapter).execute();
+        new ReadJsonAsyncTask(listAdapter, getApplicationContext()).execute();
     }
 
     @Override
@@ -46,7 +46,7 @@ public class MyConferenceScheduleActivity extends ListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.refresh){
-            new ReadJsonAsyncTask(listAdapter).execute();
+            new ReadJsonAsyncTask(listAdapter, getApplicationContext()).execute();
         }
         return super.onOptionsItemSelected(item);
     }

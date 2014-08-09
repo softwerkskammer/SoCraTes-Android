@@ -14,6 +14,7 @@ import org.softwerkskammer.socrates.R;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,9 @@ public class SessionArrayAdapter extends BaseAdapter {
     private List addHeaderSections(List<Session> values){
         List returnValue = new ArrayList();
         Date lastTimestamp = null;
+        if (null == values){
+            return Collections.emptyList();
+        }
         for (Session session : values){
             if (!session.startTime.equals(lastTimestamp)){
                 returnValue.add(session.startTime);
